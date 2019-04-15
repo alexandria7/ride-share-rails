@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'drivers/index'
+  get 'drivers/show'
+  get 'drivers/edit'
+  get 'drivers/update'
+  get 'drivers/new'
+  get 'drivers/create'
+  get 'drivers/destroy'
   get 'passengers/index'
   get 'passengers/show'
   get 'passengers/edit'
