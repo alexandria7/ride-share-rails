@@ -1,2 +1,34 @@
-<h1>Passengers#show</h1>
-<p>Find me in app/views/passengers/show.html.erb</p>
+<h1>
+    Passengers
+</h1>
+
+<h2>
+    <%= @passenger.name %>
+</h2>
+
+<p>
+    Phone number: <%= @passenger.phone_num %>
+</p>
+
+<p>
+    Total amount charged: $
+</p>
+
+<p>
+    List of trips: 
+</p>
+
+<p>
+    Edit passenger
+</p>
+
+<p>
+    Delete passenger
+</p>
+
+<p>
+    Add a new trip
+</p>
+
+<%= link_to "Back to All Passengers", passengers_path %>
+
