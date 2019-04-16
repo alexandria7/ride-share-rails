@@ -1,2 +1,18 @@
-<h1>Passengers#new</h1>
-<p>Find me in app/views/passengers/new.html.erb</p>
+<h1>Passengers</h1>
+
+<h2>Add a new passenger</h2>
+
+<%= form_with model: @passenger, class: 'create-passenger' do |f|%>
+
+<p>Please fill out this form to add a new passenger</p>
+
+<%= f.label :name %>
+<%= f.text_field :name%>
+<%= f.label :phone_num %>
+<%= f.text_field :phone_num %>
+
+<%= f.submit "Add passenger", class: 'passenger-button'%>
+
+<% end %>
+
+<%= link_to "Back to All Passengers", passengers_path %>
