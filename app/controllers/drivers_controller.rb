@@ -4,20 +4,16 @@ class DriversController < ApplicationController
   end
 
   def show
+    @driver = Driver.find_by(id: params(:id))
   end
 
-  def edit
-  end
+  def edit; end
 
-  def update
-  end
+  def update; end
 
-  def new
-  end
+  def new; end
 
-  def create
-  end
+  def create; end
 
-  def destroy
-  end
+  def destroy; end
 end
