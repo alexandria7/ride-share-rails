@@ -1,2 +1,18 @@
-<h1>Passengers#edit</h1>
-<p>Find me in app/views/passengers/edit.html.erb</p>
+<h1>Passengers</h1>
+
+<h2>Edit <%= @passenger.name %></h2>
+
+<%= form_with model: @passenger, class: 'edit-passenger' do |f|%>
+
+<p>Please fill out this form to edit passenger</p>
+
+<%= f.label "Edit name:" %>
+<%= f.text_field :name%>
+<%= f.label "Edit phone number:" %>
+<%= f.text_field :phone_num %>
+
+<%= f.submit "Edit passenger", class: 'edit-button'%>
+
+<% end %>
+
+<%= link_to "Back to All Passengers", passengers_path %>

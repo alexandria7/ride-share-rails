@@ -27,15 +27,24 @@ class PassengersController < ApplicationController
   end
 
   def edit
-    # passenger_id = params[:id].to_i
-    # @passenger = Passenger.find_by(id: passenger_id)
+    passenger_id = params[:id].to_i
+    @passenger = Passenger.find_by(id: passenger_id)
 
-    # if @passenger.nil?
-    #   redirect_to passengers_path
-    # end
+    if @passenger.nil?
+      redirect_to passengers_path
+    end
   end
 
   def update
+    passenger = Passenger.find_by(id: params[:id])
+
+    if passenger.nil?
+      redirect_to passengers_path
+    else
+      passenger.update(passenger_params)
+
+      redirect_to passenger_path(passenger.id)
+    end
   end
 
   def destroy
