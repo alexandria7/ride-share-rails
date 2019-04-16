@@ -100,6 +100,25 @@ describe PassengersController do
   end
 
   describe "destroy" do
-    # Your tests go here
+    it "returns a 404 error if a passenger is not found" do
+      invalid_passenger_id = -1
+
+      expect {
+        delete passenger_path(invalid_passenger_id)
+      }.must_change "Passenger.count", 0
+
+      must_respond_with :not_found
+    end
+
+    it "can delete a passenger" do
+      new_passenger = Passenger.create(name: "Delete this task", phone_num: "415-000-000")
+
+      expect {
+        delete passenger_path(new_passenger.id)
+      }.must_change "Passenger.count", -1
+
+      must_respond_with :redirect
+      must_redirect_to passengers_path
+    end
   end
 end
