@@ -1,2 +1,51 @@
-<h1>Passengers#show</h1>
-<p>Find me in app/views/passengers/show.html.erb</p>
+<h1>
+    Passengers
+</h1>
+
+<h2>
+    <%= @passenger.name %>
+</h2>
+
+<p>
+    Phone number: <%= @passenger.phone_num %>
+</p>
+
+<p>
+    Total amount charged: $<%= @passenger.total_amount_charged %>
+</p>
+
+<p>All trips:</p>
+<table>
+      <tr>
+        <th>Trip ID</th>
+        <th>Date</th>
+        <th>Driver</th>
+        <th>Price</th>
+        <th>Rating</th>
+      </tr>
+      <tr>
+      <% @passenger.trips.each do |trip| %>
+        <td><%= link_to trip.id, trip_path(trip.id) %></td>
+        <td><%= trip.date %></td>
+        <td><%= link_to trip.driver.name, driver_path(trip.driver.id)%></td>
+        <td>$ <%= (trip.cost.to_i/100.0).round(2) %></td>
+        <td><%= trip.rating %></td>
+      </tr>
+      <% end %>
+    </table>
+
+<p>
+    <%= link_to "Edit this passenger", edit_passenger_path %>
+</p>
+
+<p>
+    <%= link_to 'Delete this passenger', passenger_path(@passenger.id), method: :delete, data: {confirm: "Are you sure you want to delete this passenger?"} %>
+</p>
+
+<p>
+    Add a new trip
+</p>
+
+
+<%= link_to "Back to All Passengers", passengers_path %>
+

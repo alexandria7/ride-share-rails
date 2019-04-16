@@ -1,2 +1,13 @@
-<h1>Passengers#index</h1>
-<p>Find me in app/views/passengers/index.html.erb</p>
+<h1>Passengers</h1>
+<h3>All Passengers:</h3>
+
+<%= link_to "Add a new passenger", new_passenger_path %>
+
+<ul>
+    <%@passengers.each do |passenger|%>
+        <li>
+            <p><%= link_to passenger.name, passenger_path(passenger.id) %></p>
+            <p>Phone number: <%= passenger.phone_num %></p>
+        </li>
+    <%end%> 
+</ul>
