@@ -70,10 +70,8 @@ describe PassengersController do
 
   describe "new" do
     it "can get the new passenger page" do
-      # Act
       get new_passenger_path
 
-      # Assert
       must_respond_with :success
     end
   end
