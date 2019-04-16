@@ -4,12 +4,17 @@ class DriversController < ApplicationController
   end
 
   def show
-    @driver = Driver.find_by(id: params(:id))
+    @driver = Driver.find_by(id: params[:id])
   end
 
-  def edit; end
+  def edit
+    @driver = Driver.find_by(id: params[:id])
+  end
 
-  def update; end
+  def update
+    @driver = Driver.find_by(id: params[:id])
+    redirect_to driver_path(@driver) if @driver.update(driver_params)
+  end
 
   def new; end
 
