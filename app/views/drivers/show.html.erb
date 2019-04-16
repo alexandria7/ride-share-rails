@@ -1,16 +1,16 @@
 
     <h2>Driver Profile</h2>
 
-    <strong>Name:</strong> <%= @driver.name %>
+    Name: <%= @driver.name %>
     <br>
 
-    <strong>VIN:</strong> <%= @driver.vin %>
+    VIN: <%= @driver.vin %>
     <br>
 
     <% if @driver[:available] == true %>
-      <strong>Status:</strong> Available
+      Status: Available
     <% else %>
-      <strong>Status:</strong> Unavailable
+      Status: Unavailable
     <% end %>
 
   <%= link_to "Edit Driver Info", edit_driver_path(@driver.id) %>
@@ -24,5 +24,18 @@
         <th>Price</th>
         <th>Rating</th>
       </tr>
+      <tr>
+      <% @driver.trips.each do |trip| %>
+        <td><%= link_to trip.id, trip_path(trip.id) %></td>
+        <td><%= trip.date %></td>
+              <td><% if trip.passenger != nil %>
+          <%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%>
+          <% else %>
+          not available
+          <% end %>
+          <td>$ <%= (trip.cost.to_i/100.0).round(2) %></td>
+          <td><%= trip.rating %></td>
+          </tr>
+          <% end %>
     </table>
   </div>
