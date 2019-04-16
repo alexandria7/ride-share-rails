@@ -1,41 +1,36 @@
+<h2>Driver Profile</h2>
 
-    <h2>Driver Profile</h2>
+Name: <%= @driver.name %><br>
+VIN: <%= @driver.vin %><br>
+Average Rating: <%= @driver.average_rating %><br>
+<% if @driver[:available] == true %>
+Status: Available
+<% else %>
+Status: Unavailable
+<% end %>
+<%= link_to "Edit Driver Info", edit_driver_path(@driver.id) %>
+<%= link_to "Delete Driver", driver_path(@driver), method: :delete, data: { confirm: "are you sure you want to delete #{@driver.name}"} %>
 
-    Name: <%= @driver.name %>
-    <br>
-
-    VIN: <%= @driver.vin %>
-    <br>
-
-    <% if @driver[:available] == true %>
-      Status: Available
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Date</th>
+    <th>Passenger</th>
+    <th>Price</th>
+    <th>Rating</th>
+  </tr>
+  <tr>
+    <% @driver.trips.each do |trip| %>
+    <td><%= link_to trip.id, trip_path(trip.id) %></td>
+    <td><%= trip.date %></td>
+    <td><% if trip.passenger != nil %>
+    <%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%>
     <% else %>
-      Status: Unavailable
+    not available
     <% end %>
-
-  <%= link_to "Edit Driver Info", edit_driver_path(@driver.id) %>
-   <%= link_to "Delete Driver", driver_path(@driver), method: :delete, data: { confirm: "are you sure you want to delete #{@driver.name}"} %>
-
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Passenger</th>
-        <th>Price</th>
-        <th>Rating</th>
-      </tr>
-      <tr>
-      <% @driver.trips.each do |trip| %>
-        <td><%= link_to trip.id, trip_path(trip.id) %></td>
-        <td><%= trip.date %></td>
-              <td><% if trip.passenger != nil %>
-          <%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%>
-          <% else %>
-          not available
-          <% end %>
-          <td>$ <%= (trip.cost.to_i/100.0).round(2) %></td>
-          <td><%= trip.rating %></td>
-          </tr>
-          <% end %>
-    </table>
-  </div>
+    <td>$ <%= (trip.cost.to_i/100.0).round(2) %></td>
+    <td><%= trip.rating %></td>
+  </tr>
+<% end %>
+</table>
+</div>
