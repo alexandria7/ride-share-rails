@@ -2,7 +2,7 @@ class Passenger < ApplicationRecord
   has_many :trips
 
   validates :name, presence: true 
-  validates :phone_num, presence: true
+  validates :phone_num, presence: true, uniqueness: true
 
   def total_amount_charged
     passenger_trips = self.trips.all
