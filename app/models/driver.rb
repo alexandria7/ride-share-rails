@@ -2,15 +2,15 @@ class Driver < ApplicationRecord
   has_many :trips
   validates :name, :vin, presence: true
 
+  FEE = 165
+  PERCENTAGE = 0.80
+
+  def total_earnings
+    return self.trips.sum { |trip| trip.cost - FEE } * PERCENTAGE
+  end
+
   def average_rating
-    rated_trips = 0.0
-    total_rating = 0.0
-    trips.each do |trip|
-      if trip.rating
-        total_rating += trip.rating
-        rated_trips += 1
-      end
-    end
-    (total_rating / rated_trips).round(2)
+    not_nil = self.trips.find_all{ |trip| !trip.rating.nil? }
+    return 1.0 * not_nil.sum{ |trip| trip.rating } / not_nil.length
   end
 end
