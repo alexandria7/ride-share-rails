@@ -1,6 +1,6 @@
 class PassengersController < ApplicationController
   def index
-    @passengers = Passenger.all
+    @passengers = Passenger.all.order(:id)
   end
 
   def show
@@ -17,12 +17,12 @@ class PassengersController < ApplicationController
   end
 
   def create
-    passenger = Passenger.new(passenger_params)
+    @passenger = Passenger.new(passenger_params)
 
-    if passenger.save
-      redirect_to passenger_path(passenger.id)
+    if @passenger.save
+      redirect_to passenger_path(@passenger.id)
     else
-      render :new
+      render :new, status: :bad_request
     end
   end
 
@@ -36,14 +36,16 @@ class PassengersController < ApplicationController
   end
 
   def update
-    passenger = Passenger.find_by(id: params[:id])
+    @passenger = Passenger.find_by(id: params[:id])
 
-    if passenger.nil?
-      redirect_to passengers_path
+    if @passenger.update(passenger_params)
+      redirect_to passenger_path(@passenger.id)
     else
-      passenger.update(passenger_params)
+      render :edit, status: :bad_request
+    end
 
-      redirect_to passenger_path(passenger.id)
+    if @passenger.nil?
+      redirect_to passengers_path
     end
   end
 

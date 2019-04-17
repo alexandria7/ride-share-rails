@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: "homepages#index"
   resources :trips, except: %i[index new]
   resources :drivers
   resources :passengers

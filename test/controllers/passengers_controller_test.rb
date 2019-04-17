@@ -60,11 +60,29 @@ describe PassengersController do
       must_redirect_to passenger_path(passenger.id)
     end
 
-    it "will redirect to the passenger index page if given an invalid id" do
-      invalid_passenger_id = -1
-      patch passenger_path(invalid_passenger_id)
-      must_respond_with :redirect
-      must_redirect_to passengers_path
+    it "will return a bad_request (400) when asked to update with invalid data" do
+      starter_input = {
+        name: "Sarah McCarthy",
+        phone_num: "415-000-0002",
+      }
+
+      passenger_to_update = Passenger.create(starter_input)
+
+      test_input = {
+        "passenger": {
+          name: "",
+          phone_num: "415-000-0002",
+        },
+      }
+
+      expect {
+        patch passenger_path(passenger_to_update.id), params: test_input
+      }.wont_change "Passenger.count"
+
+      must_respond_with :bad_request
+      passenger_to_update.reload
+      expect(passenger_to_update.name).must_equal starter_input[:name]
+      expect(passenger_to_update.phone_num).must_equal starter_input[:phone_num]
     end
   end
 
@@ -94,6 +112,21 @@ describe PassengersController do
 
       must_respond_with :redirect
       must_redirect_to passenger_path(new_passenger.id)
+    end
+
+    it "will return a 400 with an invalid passenger" do
+      test_input = {
+        "passenger": {
+          name: "",
+          phone_num: "415-666-0000",
+        },
+      }
+
+      expect {
+        post passengers_path, params: test_input
+      }.wont_change "Passenger.count"
+
+      must_respond_with :bad_request
     end
   end
 
