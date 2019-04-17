@@ -1,15 +1,18 @@
 <h2>All Drivers</h2>
-
+<%= will_paginate @drivers %>
 <table class="table">
 <tr>
+<thead>
 <th>Driver ID</th>
 <th>Driver Name</th>
 <th>Average Rating</th>
-
-<% @drivers.all.each do |driver| %>
+</thead>
+</tr>
 <tr>
+<% @drivers.all.each do |driver| %>
 <td><%= driver.id %></td>
 <td><%= link_to driver[:name], driver_path(driver.id) %></td>
-<td><%= driver.average_rating %></td>
+<td><%= driver.average_rating.round(2) %></td>
 </tr>
 <% end %>
+</table>
