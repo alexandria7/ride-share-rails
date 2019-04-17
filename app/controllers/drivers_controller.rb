@@ -21,7 +21,13 @@ class DriversController < ApplicationController
   end
 
   def create
-    passenger = Passenger.new(driver_params)
+    driver = Driver.new(driver_params)
+
+    if driver.save
+      redirect_to driver_path(driver.id)
+    else
+      render :new
+    end
   end
 
   def destroy; end
