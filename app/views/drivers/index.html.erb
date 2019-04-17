@@ -1,10 +1,15 @@
 <h2>All Drivers</h2>
-<p>
-<ul>
+
+<table class="table">
+<tr>
+<th>Driver ID</th>
+<th>Driver Name</th>
+<th>Average Rating</th>
+
 <% @drivers.all.each do |driver| %>
-<li>
-<%= link_to driver[:name], driver_path(driver.id) %>
-</li>
-</ul>
-</p>
+<tr>
+<td><%= driver.id %></td>
+<td><%= link_to driver[:name], driver_path(driver.id) %></td>
+<td><%= driver.average_rating %></td>
+</tr>
 <% end %>

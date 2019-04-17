@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root 'drivers#index'
   resources :trips, except: %i[index new]
   resources :drivers
   resources :passengers
