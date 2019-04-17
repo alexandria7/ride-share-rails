@@ -9,7 +9,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+<body>
+<div class="grid-container">
+<nav class="navbar">
+<a href="#" class="logo">Rideshare App!</a>
+  <ul class="menu">
+    <li><a href="#work">Add Driver</a></li>
+    <li><a href="#about">Add Passenger</a></li>
+  </ul>
+</nav>
+<div class="content">
     <%= yield %>
-  </body>
+</div>
+</body>
 </html>

@@ -13,3 +13,85 @@
  *= require_tree .
  *= require_self
  */
+ @import url('https://fonts.googleapis.com/css?family=Walter+Turncoat');
+
+body {
+   background-color: #fff;
+  }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 80px 1fr 80px;
+    grid-template-areas:  "page-left navbar navbar page-right" "page-left content content page-right" "footer footer footer footer";
+  }
+
+.content {
+  grid-area: content;
+}
+
+.navbar {
+  grid-area: navbar;
+  font-family: 'Walter Turncoat', sans-serif;
+  display: block;
+  top: 2;
+  width: auto;
+  height: 60px;
+  background: #fff;
+  border: solid 5px rgb(145, 221, 183);
+  border-radius: 35px;
+ }
+
+a {
+   color: #555;
+ }
+
+ nav ul {
+   margin: 0px;
+   padding: 20 20px;
+   list-style: none;
+   overflow: hidden;
+   background-color: transparent;
+   z-index: 10;
+   border-radius: 28px;
+ }
+
+ nav li {
+   float: right;
+ }
+
+ nav li a {
+   display: block;
+   padding: 20px 10px;
+   background-color: transparent;
+   text-decoration: none;
+ }
+
+ nav li a:hover,
+ nav .menu-btn:hover {
+   color: red;
+ }
+
+ nav .logo {
+   display: block;
+   float: left;
+   font-size: 2em;
+   padding: 10px 20px;
+   text-decoration: none;
+ }
+
+ nav .menu {
+   clear: none;
+   max-height: none;
+   float: right;
+ }
+
+   .page-right {
+     grid-area: page-right; }
+
+   .page-left {
+      grid-area: page-left; }
+
+   .footer {
+     grid-area: footer; }
+ }
