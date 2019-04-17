@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,8 +14,8 @@
 <nav class="navbar">
 <a href="#" class="logo">Rideshare App!</a>
   <ul class="menu">
-    <li><a href="#work">Add Driver</a></li>
-    <li><a href="#about">Add Passenger</a></li>
+    <li><%= link_to "Add Driver", new_driver_path %></li>
+    <li><%= link_to "Add Passenger", new_passenger_path %></li>
   </ul>
 </nav>
 <div class="content">

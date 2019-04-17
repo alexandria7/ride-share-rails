@@ -11,6 +11,6 @@ class Driver < ApplicationRecord
         rated_trips += 1
       end
     end
-    (total_rating / rated_trips).to_f.round(2)
+    (total_rating / rated_trips).round(2)
   end
 end

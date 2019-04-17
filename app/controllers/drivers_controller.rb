@@ -16,9 +16,19 @@ class DriversController < ApplicationController
     redirect_to driver_path(@driver) if @driver.update(driver_params)
   end
 
-  def new; end
+  def new
+    @driver = Driver.new
+  end
 
-  def create; end
+  def create
+    passenger = Passenger.new(driver_params)
+  end
 
   def destroy; end
+
+  private
+
+  def driver_params
+    params.require(:driver).permit(:name, :vin)
+  end
 end

@@ -24,8 +24,7 @@ body {
   width: auto;
   height: 60px;
   background: #fff;
-  border: solid 5px rgb(145, 221, 183);
-  border-radius: 35px;
+  border: solid 5px rgb(145, 221, 183);;
  }
 
 a {
@@ -38,8 +37,7 @@ a {
    list-style: none;
    overflow: hidden;
    background-color: transparent;
-   z-index: 10;
-   border-radius: 28px;
+   z-index: 10;;
  }
 
  nav li {
