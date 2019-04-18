@@ -19,9 +19,23 @@ class TripsController < ApplicationController
   end
 
   def new
-  end 
+    # if params[:passenger_id]
+    #   passenger = Passenger.find_by(id: params[:passenger_id])
+    #   @trips = passenger.trips.new
+    # end
+
+    if params[:passenger_id]
+      @trip = Trip.new(passenger_id: params[:passenger_id])
+    end
+  end
 
   def create
+    @trip = Trip.create(passenger_id: Passenger.find_by(id: params[:passenger_id]).id, driver_id: Driver.find_by(availability: true).id, cost: 0, date: "Date.today")
+
+    if @trip.nil?
+      head :not_found
+      # raise
+    end
   end
 
   def edit
@@ -46,7 +60,6 @@ class TripsController < ApplicationController
       head :not_found
     end
   end
-
 
   def destroy
     trip = Trip.find_by(id: params[:id])

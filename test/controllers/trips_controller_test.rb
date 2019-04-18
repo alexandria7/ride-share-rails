@@ -15,17 +15,16 @@ describe TripsController do
   end
 
   describe "show" do
-    # it "can get a valid trip" do
-    #   valid_trip_id = trip.driver_id
-    #   get trip_path(valid_trip_id)
-    #   must_respond_with :success
-    # end
+    it "can get a valid trip" do
+      get trip_path(trip.id)
+      must_respond_with :success
+    end
 
-    # it "will redirect for an invalid trip" do
-    #   get trip_path(-1)
+    it "will show a 404 error for an invalid trip" do
+      get trip_path(-1)
 
-    #   must_respond_with :redirect
-    # end
+      must_respond_with :not_found
+    end
   end
 
   describe "edit" do
