@@ -8,14 +8,6 @@ class DriversController < ApplicationController
     @driver = Driver.find_by(id: driver_id)
   end
 
-  def update
-    driver = Driver.find_by(id: params[:id])
-    if driver.update(driver_params)
-    if @driver.nil?
-      redirect_to drivers_path
-    end
-  end
-
   def new
     @driver = Driver.new
   end
