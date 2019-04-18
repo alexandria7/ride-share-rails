@@ -1,0 +1,20 @@
+<h1>All trips for passenger</h1>
+
+<table class="table">
+      <tr>
+        <th>Trip ID</th>
+        <th>Date</th>
+        <th>Driver</th>
+        <th>Price</th>
+        <th>Rating</th>
+      </tr>
+      <tr>
+      <% @trips.each do |trip| %>
+        <td><%= link_to trip.id, trip_path(trip.id) %></td>
+        <td><%= trip.date %></td>
+        <td><%= link_to trip.driver.name, driver_path(trip.driver.id)%></td>
+        <td>$ <%= (trip.cost.to_i/100.0).round(2) %></td>
+        <td><%= trip.rating %></td>
+      </tr>
+      <% end %>
+    </table>

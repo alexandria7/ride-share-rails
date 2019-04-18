@@ -14,7 +14,8 @@
     Total amount charged: $<%= @passenger.total_amount_charged %>
 </p>
 
-<p>All trips:</p>
+<p><%= link_to "All trips", passenger_trips_path(@passenger.id) %>:</p>
+
 <table class="table">
       <tr>
         <th>Trip ID</th>
@@ -43,7 +44,7 @@
 </p>
 
 <p>
-    Add a new trip
+    <%= link_to "Request a trip", new_trip_path %>
 </p>
 
 
