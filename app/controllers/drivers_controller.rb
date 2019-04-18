@@ -12,7 +12,7 @@ class DriversController < ApplicationController
   end
 
   def update
-    driver = Driver.find(params[:id])
+    driver = Driver.find_by(id: params[:id])
     if driver.update(driver_params)
       redirect_to drivers_path
     else
@@ -36,6 +36,19 @@ class DriversController < ApplicationController
 
   def destroy
 
+  end
+
+  def availability
+    driver = Driver.find_by(id: params[:id])
+
+    if !driver
+      head :not_found
+    else
+      driver.toggle(:available)
+      driver.save
+    end
+
+    redirect_to driver_path(driver.id)
   end
 
   private
