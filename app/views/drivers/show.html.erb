@@ -2,7 +2,7 @@
 
 Name: <%= @driver.name %><br>
 VIN: <%= @driver.vin %><br>
-Average Rating: <%= @driver.average_rating %><br>
+Average Rating: <%= @driver.average_rating.round(2) %><br>
 <% if @driver[:available] == true %>
 Status: Available
 <% else %>

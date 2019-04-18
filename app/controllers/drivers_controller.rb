@@ -35,13 +35,23 @@ class DriversController < ApplicationController
   end
 
   def destroy
+    driver = Driver.find_by(id: params[:id])
 
+    if driver.nil?
+      head :not_found
+    else
+      driver.trips.each do |trip|
+        trip.update(driver_id: "--")
+      end
+      driver.destroy
+      redirect_to drivers_path
+    end
   end
 
   def availability
     driver = Driver.find_by(id: params[:id])
 
-    if !driver
+    if driver.nil?
       head :not_found
     else
       driver.toggle(:available)
