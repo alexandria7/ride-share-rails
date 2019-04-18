@@ -6,6 +6,7 @@ class DriversController < ApplicationController
   def show
     driver_id = params[:id].to_i
     @driver = Driver.find_by(id: driver_id)
+  end
 
   def update
     driver = Driver.find_by(id: params[:id])
@@ -78,6 +79,7 @@ class DriversController < ApplicationController
 
     redirect_to driver_path(driver.id)
   end
+
 
   private
 
