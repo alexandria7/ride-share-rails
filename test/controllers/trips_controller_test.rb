@@ -2,8 +2,13 @@ require "test_helper"
 
 describe TripsController do
   let (:trip) {
-    Trip.create(driver_id: Driver.create(name: "sample name", vin: "12345678ABCDO").id,
-                passenger_id: Passenger.create(name: "another name", phone_num: "415-555-5555"), date: "12-24-16")
+    Trip.create(
+      driver_id: Driver.create(name: "sample name", vin: "12345678ABCDO").id,
+      passenger_id: Passenger.create(name: "another name", phone_num: "415-555-5555").id,
+      date: "12/24/19",
+      rating: 5,
+      cost: 0,
+    )
   }
 
   describe "index" do

@@ -3,7 +3,11 @@
 <p>date: <%= @trip.date %></p>
 <p>driver:<%= link_to @trip.driver.name, driver_path(@trip.driver.id)%></p>
 <p>passenger: <%= link_to @trip.passenger.name, passenger_path(@trip.passenger.id)%></p>
-<p>price: $<%= (@trip.cost / 100.0).round(2) %></p>
+<% if @trip.cost != nil %>
+    <p>price: $<%= (@trip.cost / 100.0).round(2) %></p>
+<% else %>
+    <p>price:</p>
+<% end %>
 <p>rating: <%= @trip.rating %></p>
 
 <%= link_to "Edit this trip", edit_trip_path %>
