@@ -30,29 +30,18 @@ class TripsController < ApplicationController
   end
 
   def create
-    passenger_id = params[:passenger_id]
-    @passenger = Passenger.find_by(id: passenger_id)
-    driver = Driver.next_available
-    if @passenger && driver
-      trip_hash = {
-        passenger_id: passenger_id,
-        driver_id: driver.id,
-        date: Date.today.to_s,
-        cost: 5,
-      }
-      trip = Trip.new(trip_hash)
-      driver.available = false
-      if driver.save && trip.save
-        flash[:success] = "Your driver is: #{driver.name}. Have a lovely ride."
-      else
-        flash[:error] = "Not connecting to driver, please try again."
-      end
-      redirect_to passenger_path(passenger_id)
-    elsif !driver && @passenger
-      flash[:error] = "Not connecting to driver, please try again."
-      redirect_to passenger_path(passenger_id)
+    @trip = Trip.new(
+      date: Date.today,
+      cost: 0,
+      passenger_id: params[:passenger_id],
+      driver_id: Driver.next_available.id,
+    )
+
+    if @trip.save
+      @trip.driver.update_attribute(:available, false)
+      redirect_to trip_path(@trip)
     else
-      head :not_found
+      redirect_to passenger_path(params[:passenger_id]), available: :bad_request
     end
   end
 
