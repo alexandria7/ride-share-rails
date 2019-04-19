@@ -37,6 +37,7 @@ class PassengersController < ApplicationController
   end
 
   def update
+    passenger_id = params[:id].to_i
     @passenger = Passenger.find_by(id: passenger_id)
 
     if @passenger.update(passenger_params)
