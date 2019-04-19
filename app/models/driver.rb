@@ -1,6 +1,6 @@
 class Driver < ApplicationRecord
   has_many :trips
-  validates :name, presence: true 
+  validates :name, presence: true
   validates :vin, presence: true, uniqueness: true
 
   FEE = 165

@@ -4,9 +4,9 @@ Name: <%= @driver.name %><br>
 VIN: <%= @driver.vin %><br>
 Average Rating: <%= @driver.average_rating.round(2) %><br>
 <% if @driver[:available] == true %>
-Status: Available
+Status: Available <%= link_to "Clock Out", driver_path(@driver.id, {driver: {available: false}}), method: :patch %>
 <% else %>
-Status: Unavailable
+Status: Unavailable <%= link_to "Clock In", driver_path(@driver.id, {driver: {available: true}}), method: :patch %>
 <% end %>
 <%= link_to "Edit Driver Info", edit_driver_path(@driver.id) %>
 <%= link_to "Delete Driver", driver_path(@driver), method: :delete, data: { confirm: "are you sure you want to delete #{@driver.name}"} %>

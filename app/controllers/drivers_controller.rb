@@ -72,10 +72,9 @@ class DriversController < ApplicationController
     redirect_to driver_path(driver.id)
   end
 
-
   private
 
   def driver_params
-    params.require(:driver).permit(:name, :vin)
+    params.require(:driver).permit(:name, :vin, :available)
   end
 end

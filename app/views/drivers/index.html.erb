@@ -4,9 +4,9 @@
 <tr>
 <thead>
 <th>Driver Photo</th>
-<th>Driver ID</th>
-<th>Driver Name</th>
-<th>Average Rating</th>
+<th>Name</th>
+<th>Rating</th>
+<th>Status</th>
 </thead>
 </tr>
 <tr>
@@ -14,7 +14,7 @@
 <td><%= image_tag "https://robohash.org/#{driver.id}.png?size=50x50" %></td>
 <td><%= link_to driver[:name], driver_path(driver.id) %></td>
 <td><%= driver.average_rating.round(2) %></td>
-<td><%= driver.availability%></td>
+<td><%= driver.available %></td>
 </tr>
 <% end %>
 </table>
