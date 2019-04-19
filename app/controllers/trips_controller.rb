@@ -33,20 +33,21 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(
-      passenger: Passenger.find_by(id: params[:trip][:passenger_id]), 
-      driver: Driver.find_by(available: true), 
+      passenger: Passenger.find_by(id: params[:trip][:passenger_id]),
+      driver: Driver.find_by(available: true),
       date: Date.now.to_s,
       cost: 0,
       rating: 0,
     )
 
     if @trip.save
+      flash[:success] = "Your driver is: #{driver.name}. Have a lovely ride."
       driver.available = false
       redirect_to trip_path(@trip.id)
-    else 
+    else
+      flash[:error] = "Not connecting to driver, please try again."
       render :new
-    end 
-
+    end
     # passenger_id = params[:passenger_id]
     # @passenger = Passenger.find_by(id: passenger_id)
     # driver = Driver.next_available

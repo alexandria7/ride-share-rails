@@ -27,65 +27,6 @@ describe PassengersController do
     end
   end
 
-  describe "edit" do
-    it "can edit page for an existing passenger" do
-      get edit_passenger_path(passenger.id)
-
-      must_respond_with :success
-    end
-
-    it "will respond with redirect when attempting to edit a nonexistent passenger" do
-      get edit_passenger_path("this is not a real id")
-
-      must_respond_with :redirect
-    end
-  end
-
-  describe "update" do
-    it "can update an existing passenger" do
-      passenger_change = {
-        passenger: {
-          name: "this is an updated name!",
-          phone_num: "this is a new description!",
-        },
-      }
-
-      patch passenger_path(passenger.id), params: passenger_change
-
-      edited_passenger = Passenger.find_by(id: passenger.id)
-      expect(edited_passenger.name).must_equal passenger_change[:passenger][:name]
-      expect(edited_passenger.phone_num).must_equal passenger_change[:passenger][:phone_num]
-
-      must_respond_with :redirect
-      must_redirect_to passenger_path(passenger.id)
-    end
-
-    it "will return a bad_request (400) when asked to update with invalid data" do
-      starter_input = {
-        name: "Sarah McCarthy",
-        phone_num: "415-000-0002",
-      }
-
-      passenger_to_update = Passenger.create(starter_input)
-
-      test_input = {
-        "passenger": {
-          name: "",
-          phone_num: "415-000-0002",
-        },
-      }
-
-      expect {
-        patch passenger_path(passenger_to_update.id), params: test_input
-      }.wont_change "Passenger.count"
-
-      must_respond_with :bad_request
-      passenger_to_update.reload
-      expect(passenger_to_update.name).must_equal starter_input[:name]
-      expect(passenger_to_update.phone_num).must_equal starter_input[:phone_num]
-    end
-  end
-
   describe "new" do
     it "can get the new passenger page" do
       get new_passenger_path
@@ -127,6 +68,65 @@ describe PassengersController do
       }.wont_change "Passenger.count"
 
       must_respond_with :bad_request
+    end
+  end
+
+  describe "edit" do
+    it "can edit page for an existing passenger" do
+      get edit_passenger_path(passenger.id)
+
+      must_respond_with :success
+    end
+
+    it "will respond with redirect when attempting to edit a nonexistent passenger" do
+      get edit_passenger_path("this is not a real id")
+
+      must_respond_with :redirect
+    end
+  end
+
+  describe "update" do
+    it "can update an existing passenger" do
+      passenger_change = {
+        passenger: {
+          name: "this is an updated name!",
+          phone_num: "this is a new phone number!",
+        },
+      }
+
+      patch passenger_path(passenger.id), params: passenger_change
+
+      edited_passenger = Passenger.find_by(id: passenger.id)
+      expect(edited_passenger.name).must_equal passenger_change[:passenger][:name]
+      expect(edited_passenger.phone_num).must_equal passenger_change[:passenger][:phone_num]
+
+      must_respond_with :redirect
+      must_redirect_to passenger_path(passenger.id)
+    end
+
+    it "will return a bad_request (400) when asked to update with invalid data" do
+      starter_input = {
+        name: "Sarah McCarthy",
+        phone_num: "415-000-0002",
+      }
+
+      passenger_to_update = Passenger.create(starter_input)
+
+      test_input = {
+        "passenger": {
+          name: "",
+          phone_num: "415-000-0002",
+        },
+      }
+
+      expect {
+        patch passenger_path(passenger_to_update.id), params: test_input
+      }.wont_change "Passenger.count"
+
+      must_respond_with :bad_request
+      passenger_to_update.reload
+      expect(passenger_to_update.name).must_equal starter_input[:name]
+      expect(passenger_to_update.phone_num).must_equal starter_input[:phone_num]
     end
   end
 

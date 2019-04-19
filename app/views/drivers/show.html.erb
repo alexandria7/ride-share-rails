@@ -2,16 +2,15 @@
 
 Name: <%= @driver.name %><br>
 VIN: <%= @driver.vin %><br>
-Average Rating: <%= @driver.average_rating %><br>
+Average Rating: <%= @driver.average_rating.round(2) %><br>
 <% if @driver[:available] == true %>
-Status: Available
+Status: Available <%= link_to "Clock Out", driver_path(@driver.id, {driver: {available: false}}), method: :patch %>
 <% else %>
-Status: Unavailable
+Status: Unavailable <%= link_to "Clock In", driver_path(@driver.id, {driver: {available: true}}), method: :patch %>
 <% end %>
 <%= link_to "Edit Driver Info", edit_driver_path(@driver.id) %>
 <%= link_to "Delete Driver", driver_path(@driver), method: :delete, data: { confirm: "are you sure you want to delete #{@driver.name}"} %>
 
-<p><%= link_to "All trips", driver_trips_path(@driver.id) %>:</p>
 <table class="table">
   <tr>
     <th>Trip ID</th>
@@ -25,13 +24,14 @@ Status: Unavailable
     <td><%= link_to trip.id, trip_path(trip.id) %></td>
     <td><%= trip.date %></td>
     <td><% if trip.passenger != nil %>
-    <%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%>
+      <%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%>
     <% else %>
-    not available
+      not available
     <% end %>
     <td>$ <%= (trip.cost.to_i/100.0).round(2) %></td>
     <td><%= trip.rating %></td>
   </tr>
 <% end %>
 </table>
+<h2><%= link_to "Back to All Drivers", drivers_path %></h2>
 </div>
