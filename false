@@ -1,2 +1,2 @@
       invoke  active_record
-      create    db/migrate/20190419005915_availability.rb
+   identical    db/migrate/20190419195811_active_inactive.rb

@@ -11,10 +11,12 @@
 </tr>
 <tr>
 <% @drivers.all.each do |driver| %>
+<% if driver.active? %>
 <td><%= image_tag "https://robohash.org/#{driver.id}.png?size=50x50" %></td>
 <td><%= link_to driver[:name], driver_path(driver.id) %></td>
 <td><%= driver.average_rating.round(2) %></td>
 <td><%= driver.available %></td>
 </tr>
+<% end %>
 <% end %>
 </table>

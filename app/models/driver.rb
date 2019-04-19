@@ -16,6 +16,6 @@ class Driver < ApplicationRecord
   end
 
   def self.next_available
-    return Driver.where(available: true).order(:updated_at).first
+    return Driver.where(:available == true && :active == true).order(:updated_at).first
   end
 end

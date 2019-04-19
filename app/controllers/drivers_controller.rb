@@ -50,14 +50,16 @@ class DriversController < ApplicationController
 
     if driver.nil?
       head :not_found
+    # elsif driver.trips.any?
+    #     driver.update(active: false)
+    #     driver.trips.each do |trip|
+    #       trip.update(driver_id: driver.id)
+    #     end
     else
-      driver.trips.each do |trip|
-        trip.update(driver_id: "--")
-      end
       driver.destroy
+    end
       redirect_to drivers_path
     end
-  end
 
   def availability
     driver = Driver.find_by(id: params[:id])
@@ -75,6 +77,6 @@ class DriversController < ApplicationController
   private
 
   def driver_params
-    params.require(:driver).permit(:name, :vin, :available)
+    params.require(:driver).permit(:name, :vin, :available, :active)
   end
 end
