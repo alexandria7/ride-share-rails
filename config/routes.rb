@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
-  root to: "homepages#index"
-  resources :homepages, only: [:index]
-  resources :trips
-  resources :drivers
-  resources :passengers
 
-  resources :passengers do
-    resources :trips, only: %i[index new]
-  end
+  root "trips#index"
+
+  resources :trips, :drivers, :passengers
 
   resources :drivers do
-    resources :trips, only: %i[index new]
+    resources :trips, only: [:index, :new]
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :passengers do
+    resources :trips, only: [:index, :new]
+  end
+
+  post "/passengers/:passenger_id/trips/", to: 'trips#create', as: 'create_passenger_trip'
 end
