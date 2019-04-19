@@ -1,8 +1,8 @@
 <h1>Trip #<%= @trip.id %></h1>
 
 <p>date: <%= @trip.date %></p>
-<p>driver:<%= link_to Driver.find(@trip.driver_id).name %></p>
-<p>passenger: <%= link_to Passenger.find(@trip.passenger_id).name %></p>
+<p>driver:<%= link_to @trip.driver.name, driver_path(@trip.driver.id)%></p>
+<p>passenger: <%= link_to @trip.passenger.name, passenger_path(@trip.passenger.id)%></p>
 <% if @trip.cost != nil %>
     <p>price: $<%= (@trip.cost / 100.0).round(2) %></p>
 <% else %>
