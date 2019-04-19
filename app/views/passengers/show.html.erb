@@ -14,8 +14,6 @@
     Total amount charged: $<%= @passenger.total_amount_charged %>
 </p>
 
-<p><%= link_to "All trips", passenger_trips_path(@passenger.id) %>:</p>
-
 <table class="table">
       <tr>
         <th>Trip ID</th>
@@ -44,9 +42,8 @@
 </p>
 
 <p>
-    <%= link_to "Request a trip", new_trip_path %>
+    <%= link_to "Request a trip", passenger_trips_path(@passenger.id), method: :post %>
 </p>
-
 
 <%= link_to "Back to All Passengers", passengers_path %>
 

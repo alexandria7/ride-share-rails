@@ -25,9 +25,9 @@ Status: Unavailable <%= link_to "Clock In", driver_path(@driver.id, {driver: {av
     <td><%= link_to trip.id, trip_path(trip.id) %></td>
     <td><%= trip.date %></td>
     <td><% if trip.passenger != nil %>
-    <%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%>
+      <%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%>
     <% else %>
-    not available
+      not available
     <% end %>
     <td>$ <%= (trip.cost.to_i/100.0).round(2) %></td>
     <td><%= trip.rating %></td>
