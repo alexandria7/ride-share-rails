@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-
-  root "trips#index"
+  root to: "homepages#index"
+  resources :homepages, only: [:index]
 
   resources :trips, :drivers, :passengers
 
@@ -12,5 +12,5 @@ Rails.application.routes.draw do
     resources :trips, only: [:index, :new]
   end
 
-  post "/passengers/:passenger_id/trips/", to: 'trips#create', as: 'create_passenger_trip'
+  post "/passengers/:passenger_id/trips/", to: "trips#create", as: "create_passenger_trip"
 end
