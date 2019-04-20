@@ -1,2 +1,2 @@
       invoke  active_record
-   identical    db/migrate/20190419000842_add_column.rb
+      create    db/migrate/20190419222518_add_activeto_passengers.rb

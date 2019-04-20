@@ -18,7 +18,15 @@
     </div>
   </div>
 </div>
-<p><%= link_to "All Trips", passenger_trips_path(@passenger.id) %>:</p>
+<p>
+<% if @passenger[:active == true && !@passenger.trips.any?] %>
+<%= link_to "Delete Passenger", passenger_path(@passenger), method: :delete, data: { confirm: "are you sure you want to delete #{@passenger.name}"} %>
+<% elsif @passenger[:active == true && !@passenger.trips.any?] %> 
+<%= link_to "Deactivate Passenger", passenger_path(@passenger.id, {passenger: {active: false}}), method: :patch, data: { confirm: "Remove #{@passenger.name} from index?"} %>
+<% else %>
+PASSENGER INACTIVE -- RECORD ARCHIVED
+<% end %>
+</p>
 
 <%= link_to "Request Ride", create_passenger_trip_path(@passenger), method: :post, class: "request" %>
 
@@ -45,15 +53,5 @@
 <p>
     <%= link_to "Edit this passenger", edit_passenger_path %>
 </p>
-
-<p>
-    <%= link_to 'Delete this passenger', passenger_path(@passenger.id), method: :delete, data: {confirm: "Are you sure you want to delete this passenger?"} %>
-</p>
-
-<p>
-
-</p>
-
-
 <%= link_to "Back to All Passengers", passengers_path %>
 
