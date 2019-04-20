@@ -60,9 +60,22 @@ class DriversController < ApplicationController
     end
   end
 
+  def availability
+    driver = Driver.find_by(id: params[:id])
+
+    if driver.nil?
+      head :not_found
+    else
+      driver.toggle(:available)
+      driver.save
+    end
+
+    redirect_to driver_path(driver.id)
+  end
+
   private
 
   def driver_params
-    params.require(:driver).permit(:name, :vin)
+    params.require(:driver).permit(:name, :vin, :available, :active)
   end
 end

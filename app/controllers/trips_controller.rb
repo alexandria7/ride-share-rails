@@ -1,3 +1,5 @@
+require "date"
+
 class TripsController < ApplicationController
   def index
     if params[:passenger_id]
@@ -10,23 +12,14 @@ class TripsController < ApplicationController
   end
 
   def show
-    trip_id = params[:id].to_i
-    @trip = Trip.find_by(id: trip_id)
-
+    @trip = Trip.find_by(id: params[:id])
     if @trip.nil?
       head :not_found
     end
   end
 
   def new
-    # if params[:passenger_id]
-    #   passenger = Passenger.find_by(id: params[:passenger_id])
-    #   @trips = passenger.trips.new
-    # end
-
-    if params[:passenger_id]
-      @trip = Trip.new(passenger_id: params[:passenger_id])
-    end
+    @trip = Trip.new
   end
 
   def create
@@ -36,12 +29,11 @@ class TripsController < ApplicationController
       passenger_id: params[:passenger_id],
       driver_id: Driver.next_available.id,
     )
-
     if @trip.save
       @trip.driver.update_attribute(:available, false)
-      redirect_to trip_path(@trip)
+      redirect_to trip_path(@trip.id)
     else
-      redirect_to passenger_path(params[:passenger_id]), available: :bad_request
+      redirect_to passenger_path(@trip.passenger_id), available: :bad_request
     end
   end
 
@@ -82,6 +74,6 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:date, :rating, :cost, :driver_id, :passenger_id)
+    params.require(:trip).permit(:rating, :cost, :driver_id, :passenger_id)
   end
 end

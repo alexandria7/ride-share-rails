@@ -6,6 +6,7 @@ class PassengersController < ApplicationController
   def show
     passenger_id = params[:id].to_i
     @passenger = Passenger.find_by(id: passenger_id)
+    @trip = Trip.new
 
     if @passenger.nil?
       redirect_to passengers_path
@@ -36,7 +37,8 @@ class PassengersController < ApplicationController
   end
 
   def update
-    @passenger = Passenger.find_by(id: params[:id])
+    passenger_id = params[:id].to_i
+    @passenger = Passenger.find_by(id: passenger_id)
 
     if @passenger.update(passenger_params)
       redirect_to passenger_path(@passenger.id)
