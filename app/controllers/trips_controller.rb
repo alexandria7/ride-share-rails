@@ -54,7 +54,7 @@ class TripsController < ApplicationController
 def create
   @trip = Trip.new(
     date: Date.today,
-    cost: 0,
+    cost: 1,
     passenger_id: params[:passenger_id],
     driver_id: Driver.next_available.id
   )

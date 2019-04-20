@@ -11,8 +11,10 @@ Status: Unavailable <%= link_to "Clock In", driver_path(@driver.id, {driver: {av
 <%= link_to "Edit Driver Info", edit_driver_path(@driver.id) %><br>
 <% if @driver[:active == true && !@driver.trips.any?] %>
 <%= link_to "Delete Driver", driver_path(@driver), method: :delete, data: { confirm: "are you sure you want to delete #{@driver.name}"} %>
-<% else %>
+<% elsif @driver[:active == true && !@driver.trips.any?] %>
 <%= link_to "Deactivate Driver", driver_path(@driver.id, {driver: {active: false}}), method: :patch, data: { confirm: "Remove #{@driver.name} from index?"} %>
+<% else %>
+DRIVER INACTIVE -- RECORD ARCHIVED
 <% end %>
 <table class="table">
   <tr>

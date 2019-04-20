@@ -37,16 +37,15 @@ class PassengersController < ApplicationController
   end
 
   def update
+    passenger_id = params[:id].to_i
     @passenger = Passenger.find_by(id: passenger_id)
 
     if @passenger.update(passenger_params)
       redirect_to passenger_path(@passenger.id)
+    elsif @passenger.nil? || !@passenger.active
+        redirect_to passengers_path
     else
       render :edit, status: :bad_request
-    end
-
-    if @passenger.nil?
-      redirect_to passengers_path
     end
   end
 
@@ -57,13 +56,13 @@ class PassengersController < ApplicationController
       head :not_found
     else
       passenger.destroy
-      redirect_to passengers_path
+      redirect_to root_path
     end
   end
 
   private
 
   def passenger_params
-    return params.require(:passenger).permit(:name, :phone_num)
+    return params.require(:passenger).permit(:name, :phone_num, :active)
   end
 end
