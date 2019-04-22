@@ -56,7 +56,7 @@ class PassengersController < ApplicationController
       head :not_found
     else
       passenger.destroy
-      redirect_to root_path
+      redirect_to passengers_path
     end
   end
 
